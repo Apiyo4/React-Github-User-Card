@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import User from './components/User';
 import Axios from 'axios';
+import Followers from './components/Followers';
 
 export default class App extends React.Component {
   constructor(){
@@ -26,19 +27,23 @@ export default class App extends React.Component {
       
       this.setState({
         followersArray: res.data.map(re=>{
-          return re.login;
+          return re;
         })
       })
-      console.log(this.state.followersArray)
+      
     })
     .catch(err=>console.log(err));
-
+    
   }
   render(){
     return (
       <div className="App container">
         Hello world
         <User  user= {this.state.user}/>
+    {this.state.followersArray.map(user=>{
+      return <Followers  key={user.login} user={user}    />
+    })}
+        
       </div>
     );
   }
