@@ -38,7 +38,7 @@ export default class App extends React.Component {
   render(){
     return (
       <div className="App container">
-        Hello world
+        <h1>React Github User Card</h1>
         <User  user= {this.state.user}/>
     {this.state.followersArray.map(user=>{
       return <Followers  key={user.login} user={user}    />
