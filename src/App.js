@@ -8,6 +8,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       user : [],
+      followersArray: []
     }
   }
   componentDidMount(){
@@ -17,8 +18,21 @@ export default class App extends React.Component {
       this.setState({
         user: res.data,
       })
-      console.log(this.state.user);
+
     })
+    .catch(err=>console.log(err));
+    Axios.get('https://api.github.com/users/Apiyo4/followers')
+    .then(res=>{
+      
+      this.setState({
+        followersArray: res.data.map(re=>{
+          return re.login;
+        })
+      })
+      console.log(this.state.followersArray)
+    })
+    .catch(err=>console.log(err));
+
   }
   render(){
     return (
